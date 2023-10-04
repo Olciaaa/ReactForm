@@ -3,11 +3,6 @@ const isValid = error =>{
 }
 
 const findInputErrors = (errors, label) => {
-    // var required = Object.keys(errors)
-    // .filter(key => key.includes(label))
-    // .reduce((cur, key) => {return Object.assign(cur, {error: errors[key]})}, {});
-    console.log(errors);
-
     return Object.keys(errors)
     .filter(key => key.includes(label))
     .reduce((cur, key) => {return Object.assign(cur, {error: errors[key]})}, {});

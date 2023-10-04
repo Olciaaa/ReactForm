@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { isValid, findInputErrors } from './utils/formCheck';
-import InputError from './InputError';
+import { FormHelperText, MenuItem, TextField } from '@mui/material';
 
 const Dropdown = (props) => {
     const {label, id, values, validation} = props;
@@ -15,22 +15,23 @@ const Dropdown = (props) => {
 
     return (
         <>
-            <label>
-                {label}
-
-                <select id={id} name={label} {...register(label, validation)}>
-                    {values.map((value) => (
-                        <option key = {value} value = {value}>{value}</option>
-                    ))}
-                </select>
-
-                {isInvalid && (
-                    <InputError
-                        message={"Nie spełnione kryteria"}
-                        key={"Nie spełnione kryteria"}
-                    />
-                )}
-            </label>
+            <TextField 
+                variant="standard"
+                style={{ margin: "10px 0" }}
+                id={id} 
+                name={label} 
+                label={label}
+                error = {isInvalid}
+                defaultValue={""}
+                select
+                {...register(label, validation)}
+                >
+                
+                {values.map((value) => (
+                    <MenuItem key = {value} value = {value}>{value}</MenuItem>
+                ))}
+            </TextField>
+            {isInvalid && <FormHelperText style={{ margin: "10px 0" }} error>Nie spełnione kryteria</FormHelperText>}
         </>
     );
 };
